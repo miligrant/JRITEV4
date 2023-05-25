@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +19,14 @@ public class HomepageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private JobAdapter jobAdapter;
     private List<Job> jobList;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,6 +50,18 @@ public class HomepageActivity extends AppCompatActivity {
         // Load jobs from Firebase or any other data source
         // For demonstration purposes, let's assume we have some dummy jobs
         loadDummyJobs();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        firebaseAuth.signOut();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        Log.d("USERHOMEPAGE","USER = "+user.getUid());
+        if (user == null){
+            Intent intent = new Intent(HomepageActivity.this, RegistrationActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void loadDummyJobs() {
