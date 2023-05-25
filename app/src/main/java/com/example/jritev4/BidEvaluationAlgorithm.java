@@ -4,6 +4,7 @@ import java.util.List;
 
 public class BidEvaluationAlgorithm {
 
+    String JobId;
     public static Bid evaluateBestBid(List<Bid> bids) {
         Bid bestBid = null;
 
@@ -18,8 +19,8 @@ public class BidEvaluationAlgorithm {
 
     private static boolean isBetterBid(Bid bid, Bid bestBid) {
         // Criteria comparison logic
-        double dif = bid.getBidOffer() - bid.getJobId()
-        if (bid.getBidOffer() < .jobPrice)
+        // double dif = bid.getBidOffer() - bid.getJobId()
+       // if (bid.getBidOffer() < .jobPrice)
 
         double profileRatingComparison = bid.getProfileRating()-(bestBid.getProfileRating());
         if (profileRatingComparison > 0) {
@@ -38,4 +39,9 @@ public class BidEvaluationAlgorithm {
 
         return false;
     }
+
+    public void retrieveJobId (Bid bid){
+        JobId = bid.getJobId();
+    }
 }
+

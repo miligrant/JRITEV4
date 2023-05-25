@@ -1,14 +1,15 @@
 package com.example.jritev4;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Job {
+public class Job implements Serializable {
     private String jobId;
     private String jobTitle;
     private String jobDescription;
     private String jobRequirements;
-    private String jobPrice;
+    private double jobPrice;
     private List<Bid> bids;
 
     public void setJobId(String jobId) {
@@ -27,7 +28,7 @@ public class Job {
         this.jobRequirements = jobRequirements;
     }
 
-    public void setJobPrice(String jobPrice) {
+    public void setJobPrice(double jobPrice) {
         this.jobPrice = jobPrice;
     }
 
@@ -40,7 +41,7 @@ public class Job {
         // Required empty constructor for Firebase
     }
 
-    public Job(String jobId, String jobTitle, String jobDescription, String jobRequirements, String jobPrice) {
+    public Job(String jobId, String jobTitle, String jobDescription, String jobRequirements, double jobPrice) {
         this.jobId = jobId;
         this.jobTitle = jobTitle;
         this.jobDescription = jobDescription;
@@ -65,7 +66,7 @@ public class Job {
         return jobRequirements;
     }
 
-    public String getJobPrice() {
+    public double getJobPrice() {
         return jobPrice;
     }
 
